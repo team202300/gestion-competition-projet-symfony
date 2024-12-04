@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitions List</title>
+
+    <style>
+        /* Basic table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        /* Header styling */
+        th {
+            background-color: #d32f2f; /* Red background for headers */
+            color: white; /* White text */
+            padding: 10px;
+            text-align: left;
+        }
+
+        /* Row styling */
+        td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        /* Alternate row coloring */
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Light gray for even rows */
+        }
+
+        /* Highlight rows on hover */
+        tr:hover {
+            background-color: #ffcccc; /* Light red on hover */
+        }
+
+        /* Styling for the table container */
+        h1 {
+            color: #d32f2f; /* Red color for the header */
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Competitions List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Type Competition</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for competition in competitions %}
+                <tr>
+                    <td>{{ competition.id }}</td>
+                    <td>{{ competition.name }}</td>
+                    <td>{{ competition.type }}</td>
+                    <td>{{ competition.dateC|date('Y-m-d') }}</td>
+                    <td>{{ competition.typeCompetition.name }}</td>
+                    <td><a href="{{ path('app_competitions_show2', {'id': competition.id}) }}" class="btn btn-show">Show</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">No competitions found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% endblock %}
